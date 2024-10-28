@@ -23,7 +23,7 @@ The following code shows a sample generator program:
 
 cpp
 
-`#include "iostream"
+#include "iostream"
 #include "string"
 #include <fstream>
 using namespace std;
