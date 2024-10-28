@@ -23,30 +23,30 @@ The following code shows a sample generator program:
 
 cpp
 
-#include "iostream"
-#include "string"
-#include <fstream>
-using namespace std;
+    #include "iostream"
+    #include "string"
+    #include <fstream>
+    using namespace std;
 
-int main(void){
-string type1, type2;
-cin >> type1;
-cin >> type2;
-cout << type1 << ' ' << type2 << endl;
+    int main(void){
+        string type1, type2;
+        cin >> type1;
+        cin >> type2;
+        cout << type1 << ' ' << type2 << endl;
 
-    ofstream fout("func_1.cpp");
-    fout << "#include <iostream>" << endl;
-    fout << "int f(void) {" << endl;
-    fout << type1 << " var1 = 1;" << endl;
-    fout << type1 << " var2 {3};" << endl;
-    fout << "std::cout << var1 + var2 << std::endl;" << endl;
-    fout << "return 0;" << endl;
-    fout << "}" << endl;
-    fout.close();
+        ofstream fout("func_1.cpp");
+        fout << "#include <iostream>" << endl;
+        fout << "int f(void) {" << endl;
+        fout << type1 << " var1 = 1;" << endl;
+        fout << type1 << " var2 {3};" << endl;
+        fout << "std::cout << var1 + var2 << std::endl;" << endl;
+        fout << "return 0;" << endl;
+        fout << "}" << endl;
+        fout.close();
 
     return 0;
 
-}`
+    }
 
 This program creates a file containing a single function `f()`, which:
 
