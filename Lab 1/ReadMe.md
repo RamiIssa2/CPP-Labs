@@ -21,8 +21,6 @@ Develop a program that takes as input two or three data types from the keyboard.
 
 The following code shows a sample generator program:
 
-cpp
-
     #include "iostream"
     #include "string"
     #include <fstream>
