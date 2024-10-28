@@ -5,8 +5,10 @@
 using namespace std;
 
 string char_types[4] = {"char", "char16_t", "char32_t", "wchar_t"};
-string sint_types[14] = {"signed int", "signed short int", "signed char", "singed long int", "signed long long int", "int","short","short int","signed short","long","long int", "signed long", "signed long long", "long long int"};
-string uint_types[9] = {"unsigned char", "unsigned short int", "unsigned int", "unsigned long int", "unsigned long long int","unsigned short", "unsigned", "unsigned long", "unsigned long long"};
+string sint_types[14] = {"signed int", "signed short int", "signed char", "singed long int", "signed long long int",
+ "int","short","short int","signed short","long","long int", "signed long", "signed long long", "long long int"};
+string uint_types[9] = {"unsigned char", "unsigned short int", "unsigned int", "unsigned long int", "unsigned long long int",
+"unsigned short", "unsigned", "unsigned long", "unsigned long long"};
 string float_types[3] = {"float", "double", "long double"};
 string bool_types[1] = {"bool"};
 
@@ -139,8 +141,8 @@ int main(void){
 	fout << type1 << " var1 = " << val1 <<";"<< endl;
 	fout << type2 << " var2 = " << val2 << ";"<< endl;
 	fout << endl;
-    fout << "std::cout << \"var1 = \" << " << val1 <<";"<< endl;
-	fout << "std::cout << \"var2 = \" << " << val2 << ";"<< endl;
+    fout << "std::cout << \"var1 = \" << " << val1 <<" << std::endl;"<< endl;
+	fout << "std::cout << \"var2 = \" << " << val2 << " << std::endl;"<< endl;
 	fout << endl;
     if (ops_code == 1){
         for (string op : allowed_ops1){
