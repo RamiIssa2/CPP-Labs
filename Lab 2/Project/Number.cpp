@@ -50,8 +50,27 @@ std::string numberToText(int num) {
     return number_text;
 }
 
+// Constructors
 // Default Constructor
-Number::Number() :value(0), text("zero") { std::cout << "Default Constructor" << std::endl; }
+Number::Number() :value(0), text("zero") { std::cout << "Default Constructor Called" << std::endl; }
+
+// Normal Constructor
+Number::Number(int value) :value(value) {
+    text = numberToText(value);
+    std::cout << "Normal Constructor Called" << std::endl;
+}
+
+// Copy Constructor
+Number::Number(const Number& num) :value(num.value), text(num.text) {
+    std::cout << "Copy Constructor Called" << std::endl;
+}
+
+// Move Constructor
+Number::Number(Number&& num) noexcept {
+    value = std::move(num.value);
+    text = std::move(num.text);
+    std::cout << "Move Constructor Called" << std::endl;
+}
 
 int main(){
     try {
@@ -59,5 +78,9 @@ int main(){
     } catch (const std::out_of_range& e) {
         std::cerr << e.what() << std::endl;
     }
+    Number n1;
+    Number n2(4);
+    Number n3 = n2;
+    Number n4 = std::move(n1);
     return 0;
 }
