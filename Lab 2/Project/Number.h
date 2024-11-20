@@ -46,4 +46,13 @@ class Number
         // Getters
         [[nodiscard]] int getValue() const { return value; }
         [[nodiscard]] std::string getText() const { return text; }
+
+        // Friend function to overload `<<` operator
+        friend std::ostream& operator<<(std::ostream& os, const Number& num);
 };
+
+// Implementation of friend operator
+std::ostream& operator<<(std::ostream& os, const Number& num) {
+    os << num.value << " [" << num.text << "]";
+    return os;
+}
