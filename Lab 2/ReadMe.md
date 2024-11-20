@@ -12,11 +12,11 @@ The same applies to the overloaded assignment operator (two variants: without an
 
 ## Requirements:
 
-- Class Definition:\n
-  Place the class definition in a header file (`.hpp`).
+- Class Definition:  
+  Place the class definition in a header file (`.hpp`).  
   Implement class methods in a separate `.cpp` file.
 
-- Program Implementation:
+- Program Implementation:  
   Write a separate `.cpp` module to work with instances of the developed class. This program must demonstrate:
   1. Creation of both static and dynamic class instances.
   2. Use of a standard C-style vector to handle instances. Write a function to process this vector.
