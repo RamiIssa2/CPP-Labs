@@ -78,9 +78,20 @@ int main(){
     } catch (const std::out_of_range& e) {
         std::cerr << e.what() << std::endl;
     }
+
+    try {
+        std::cout << numberToText(256341897) << std::endl;
+    } catch (const std::out_of_range& e) {
+        std::cerr << e.what() << std::endl;
+    }
+
     Number n1;
+    std::cout << n1 << std::endl;
     Number n2(4);
+    std::cout << n2 << std::endl;
     Number n3 = n2;
+    std::cout << n3 << std::endl;
     Number n4 = std::move(n1);
+    std::cout << n4 << std::endl;
     return 0;
 }
