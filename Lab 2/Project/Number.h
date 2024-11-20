@@ -9,22 +9,30 @@ class Number
         std::string text;
 
     public:
+        // Constructors
         // Default Constructor
         Number() = default;
+
         // Normal Constructor
         explicit Number(int value);
+
         // Copy Constructor
         Number(const Number& num) = default;
+
         // Move Constructor
         Number(Number&& num) noexcept = default;
 
+        // Assignment Operators
         // Copy Assignment Operator
         Number& operator=(const Number& num) = default;
+
         // Move Assignment Operator
         Number& operator=(Number&& num) noexcept = default;
 
+        // Addition Operators
         // Copy Addition Operator
         Number operator+(const Number& num) const;
+        
         // Move Addition Operator
         Number operator+(Number&& num) const noexcept; 
 
