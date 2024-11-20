@@ -21,9 +21,9 @@ The same applies to the overloaded assignment operator (two variants: without an
 - Program Implementation:  
   Write a separate `.cpp` module to work with instances of the developed class. This program must demonstrate:
   1. Creation of both static and dynamic class instances.
-  1. Use of a standard C-style vector to handle instances. Write a function to process this vector.
-  1. Passing class instances to functions and returning an instance from a function, including by reference.
-  1. Working with the developed class by creating vectors and lists of class instances using the standard `std::vector` and `std::list`, with lengths between 5 and 10.
+  2. Use of a standard C-style vector to handle instances. Write a function to process this vector.
+  3. Passing class instances to functions and returning an instance from a function, including by reference.
+  4. Working with the developed class by creating vectors and lists of class instances using the standard `std::vector` and `std::list`, with lengths between 5 and 10.
 
 ## Tasks to Demonstrate:
 
