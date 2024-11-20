@@ -11,28 +11,28 @@ class Number
     public:
         // Constructors
         // Default Constructor
-        Number() = default;
+        Number();
 
         // Normal Constructor
         explicit Number(int value);
 
         // Copy Constructor
-        Number(const Number& num) = default;
+        Number(const Number& num);
 
         // Move Constructor
-        Number(Number&& num) noexcept = default;
+        Number(Number&& num) noexcept;
 
         // Assignment Operators
         // Copy Assignment Operator
-        Number& operator=(const Number& num) = default;
+        Number& operator=(const Number& num);
 
         // Move Assignment Operator
-        Number& operator=(Number&& num) noexcept = default;
+        Number& operator=(Number&& num) noexcept;
 
         // Addition Operators
         // Copy Addition Operator
         Number operator+(const Number& num) const;
-        
+
         // Move Addition Operator
         Number operator+(Number&& num) const noexcept; 
 
