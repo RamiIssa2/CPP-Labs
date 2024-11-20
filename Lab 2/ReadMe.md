@@ -20,6 +20,7 @@ The same applies to the overloaded assignment operator (two variants: without an
 
 - Program Implementation:  
   Write a separate `.cpp` module to work with instances of the developed class. This program must demonstrate:
+
   1. Creation of both static and dynamic class instances.
   2. Use of a standard C-style vector to handle instances. Write a function to process this vector.
   3. Passing class instances to functions and returning an instance from a function, including by reference.
