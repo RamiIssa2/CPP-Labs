@@ -6,7 +6,9 @@ You need to design a class that implements the storage of data related to a clas
 
 For this class, you need to implement all necessary constructors, including copy and move constructors, as well as a destructor. All constructors and the destructor should "report" their calls, for example:
 
-    std::cout << "Copy constructor" << std::endl;
+```
+std::cout << "Copy constructor" << std::endl;
+```
 
 The same applies to the overloaded assignment operator (two variants: without and with move semantics).
 
@@ -19,9 +21,9 @@ The same applies to the overloaded assignment operator (two variants: without an
 - Program Implementation:  
   Write a separate `.cpp` module to work with instances of the developed class. This program must demonstrate:
   1. Creation of both static and dynamic class instances.
-  2. Use of a standard C-style vector to handle instances. Write a function to process this vector.
-  3. Passing class instances to functions and returning an instance from a function, including by reference.
-  4. Working with the developed class by creating vectors and lists of class instances using the standard `std::vector` and `std::list`, with lengths between 5 and 10.
+  1. Use of a standard C-style vector to handle instances. Write a function to process this vector.
+  1. Passing class instances to functions and returning an instance from a function, including by reference.
+  1. Working with the developed class by creating vectors and lists of class instances using the standard `std::vector` and `std::list`, with lengths between 5 and 10.
 
 ## Tasks to Demonstrate:
 
