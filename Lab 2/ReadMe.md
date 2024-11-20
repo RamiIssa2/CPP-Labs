@@ -12,7 +12,7 @@ The same applies to the overloaded assignment operator (two variants: without an
 
 ## Requirements:
 
-- Class Definition:
+- Class Definition:\n
   Place the class definition in a header file (`.hpp`).
   Implement class methods in a separate `.cpp` file.
 
