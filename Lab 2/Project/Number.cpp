@@ -1,7 +1,7 @@
 #include "Number.h"
 #include <iostream>
 #include <vector>
-#include<string>
+#include <string>
 
 std::string numberToText(int num) {
     if (num > 999999999) {
@@ -72,6 +72,32 @@ Number::Number(Number&& num) noexcept {
     std::cout << "Move Constructor Called" << std::endl;
 }
 
+// Assignment Operators
+// Copy Assignment Operator
+Number& Number::operator=(const Number& num) {
+    if (this == &num) return *this;
+    value = num.value;
+    text = num.text;
+    std::cout << "Copy Assignment Operator Called" << std::endl;
+    return *this;
+}
+
+// Move Assignment Operator
+Number& Number::operator=(Number&& num) noexcept {
+    if (this == &num) return *this;
+    
+    // Move resources
+    value = num.value;
+    text = std::move(num.text);
+
+    // Reset the moved-from object
+    num.value = 0;
+    num.text = "zero";
+
+    std::cout << "Move Assignment Operator Called" << std::endl;
+    return *this;
+}
+
 int main(){
     try {
         std::cout << numberToText(1000000000) << std::endl;
@@ -93,5 +119,12 @@ int main(){
     std::cout << n3 << std::endl;
     Number n4 = std::move(n1);
     std::cout << n4 << std::endl;
+
+    Number n5(13);
+    n5 = n3;
+    std::cout << n5 << std::endl << n3 << std::endl;
+    Number n6(17);
+    n6 = std::move(n5);
+    std::cout <<  n6 << std::endl << n5 << std::endl;
     return 0;
 }
