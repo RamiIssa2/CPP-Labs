@@ -76,8 +76,11 @@ Number::Number(Number&& num) noexcept {
 // Copy Assignment Operator
 Number& Number::operator=(const Number& num) {
     if (this == &num) return *this;
+
+    // Copy resources
     value = num.value;
     text = num.text;
+    
     std::cout << "Copy Assignment Operator Called" << std::endl;
     return *this;
 }
