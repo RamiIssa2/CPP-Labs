@@ -35,7 +35,7 @@ class Number
         Number operator+(const Number& num) const;
 
         // Move Addition Operator
-        Number operator+(Number&& num) const noexcept; 
+        Number operator+(Number&& num) const noexcept;
 
         // Destructor
 	    ~Number() = default;

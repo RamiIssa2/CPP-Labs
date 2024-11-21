@@ -98,6 +98,30 @@ Number& Number::operator=(Number&& num) noexcept {
     return *this;
 }
 
+// Addition Operators
+// Copy Addition Operator
+Number Number::operator+(const Number& num) const {
+    std::cout << "Copy Addition Operator Called" << std::endl;
+    return Number(value + num.value);
+}
+
+// Move Addition Operator
+Number Number::operator+(Number&& num) const noexcept {
+    int sum = value + num.value;
+
+    // Reset both operands
+    // Reset the first operand (requires const_cast)
+    const_cast<Number*>(this)->value = 0;
+    const_cast<Number*>(this)->text = "zero";
+
+    // Reset the second operand
+    num.value = 0;
+    num.text = "zero";
+
+    std::cout << "Move Addition Operator Called" << std::endl;
+    return Number(sum);
+}
+
 int main(){
     try {
         std::cout << numberToText(1000000000) << std::endl;
@@ -126,5 +150,10 @@ int main(){
     Number n6(17);
     n6 = std::move(n5);
     std::cout <<  n6 << std::endl << n5 << std::endl;
+
+    n5 = n3 + n2;
+    std::cout << n5 << std::endl << n3 << std::endl << n2 << std::endl;
+    n6 = std::move(n5) + std::move(n2);
+    std::cout <<  n6 << std::endl << n5 << std::endl << n2 << std::endl;
     return 0;
 }
