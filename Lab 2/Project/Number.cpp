@@ -122,6 +122,11 @@ Number Number::operator+(Number&& num) const noexcept {
     return Number(sum);
 }
 
+// Destructor
+Number::~Number() {
+    std::cout << "Destructor Called" << std::endl;
+}
+
 int main(){
     try {
         std::cout << numberToText(1000000000) << std::endl;
