@@ -38,7 +38,7 @@ class Number
         Number operator+(Number&& num) const noexcept;
 
         // Destructor
-	    ~Number() = default;
+	    ~Number();
 
         // Setters
         void setValue(int value) { this->value = value; }
