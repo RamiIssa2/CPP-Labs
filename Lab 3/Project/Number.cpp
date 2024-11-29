@@ -52,24 +52,21 @@ std::string numberToText(int num) {
 
 // Constructors
 // Default Constructor
-Number::Number() :value(0), text("zero") { std::cout << "Default Constructor Called" << std::endl; }
+Number::Number() :value(0), text("zero") {}
 
 // Normal Constructor
 Number::Number(int value) :value(value) {
     text = numberToText(value);
-    std::cout << "Normal Constructor Called" << std::endl;
 }
 
 // Copy Constructor
 Number::Number(const Number& num) :value(num.value), text(num.text) {
-    std::cout << "Copy Constructor Called" << std::endl;
 }
 
 // Move Constructor
 Number::Number(Number&& num) noexcept {
     value = std::move(num.value);
     text = std::move(num.text);
-    std::cout << "Move Constructor Called" << std::endl;
 }
 
 // Assignment Operators
@@ -81,7 +78,6 @@ Number& Number::operator=(const Number& num) {
     value = num.value;
     text = num.text;
     
-    std::cout << "Copy Assignment Operator Called" << std::endl;
     return *this;
 }
 
@@ -97,14 +93,12 @@ Number& Number::operator=(Number&& num) noexcept {
     num.value = 0;
     num.text = "zero";
 
-    std::cout << "Move Assignment Operator Called" << std::endl;
     return *this;
 }
 
 // Addition Operators
 // Copy Addition Operator
 Number Number::operator+(const Number& num) const {
-    std::cout << "Copy Addition Operator Called" << std::endl;
     return Number(value + num.value);
 }
 
@@ -121,12 +115,8 @@ Number Number::operator+(Number&& num) const noexcept {
     num.value = 0;
     num.text = "zero";
 
-    std::cout << "Move Addition Operator Called" << std::endl;
     return Number(sum);
 }
 
 // Destructor
-Number::~Number() {
-    std::cout << "Destructor Called for Number with value = " << value
-              << " and text = \"" << text << "\"" << std::endl;
-}
+Number::~Number() {}
