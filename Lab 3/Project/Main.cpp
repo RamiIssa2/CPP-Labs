@@ -60,38 +60,59 @@ list<Number> getTopNLargest(const vector<Number>& v1, int n) {
     return list1;
 }
 
+// Function to extract smallest n elements from v2 and form a list
+list<Number> getSmallestNElements(const vector<Number>& v2, int n) {
+    if (n > v2.size() || n < 0) {
+        throw out_of_range("Invalid value of n for smallest N elements.");
+    }
+
+    // Create a copy of v2 for partial sorting
+    vector<Number> temp(v2);
+
+    // Find the smallest n elements
+    partial_sort(temp.begin(), temp.begin() + n, temp.end(), [](const Number& a, const Number& b) {
+        return a.getValue() < b.getValue(); // Sort by value ascending
+    });
+
+    // Create a list from the smallest n elements
+    list<Number> list2(temp.begin(), temp.begin() + n);
+    return list2;
+}
+
 int main() {
 
-    // Generate vector v1
-    vector<Number> v1 = createRandomVector();
-
-    // Output the contents of v1 for verification
-    cout << "Generated vector v1 with " << v1.size() << " elements.\n";
-    
-    // Define subrange bounds (last 200 elements)
-    int b = v1.size() - 200;
-    int e = v1.size();
-
-    // Create vector v2 from subrange of v1
     try {
+        // Generate vector v1
+        vector<Number> v1 = createRandomVector();
+
+        // Output the contents of v1 for verification
+        cout << "Generated vector v1 with " << v1.size() << " elements.\n";
+        
+        // Define subrange bounds (last 200 elements)
+        int b = v1.size() - 200;
+        int e = v1.size();
+
+        // Create vector v2 from subrange of v1
         vector<Number> v2 = createSubrange(v1, b, e);
 
         // Output the contents of v2 for verification
         cout << "\nCreated vector v2 with " << v2.size() << " elements (subrange).\n";
-    } catch (const out_of_range& ex) {
-        cerr << "Error: " << ex.what() << endl;
-    }
 
-    // Define n
-    int n = 30;
+        // Define n
+        int n = 30;
 
-    try {
         // Form list1 with top n largest elements
         list<Number> list1 = getTopNLargest(v1, n);
 
         // Output the contents of list1 for verification
-        cout << "\nTop " << n << " largest elements in list1:\n";
-        for (const auto& num : list1) {
+        cout << "\nTop " << n << " largest elements from v1 in list1:\n";
+
+        // Form list2 with smallest n elements from v2
+        list<Number> list2 = getSmallestNElements(v2, n);
+
+        // Output the contents of list2 for verification
+        cout << "\nSmallest " << n << " elements from v2 in list2:\n";
+        for (const auto& num : list2) {
             cout << num << "\n";
         }
     } catch (const out_of_range& ex) {
