@@ -41,6 +41,25 @@ vector<Number> createSubrange(const vector<Number>& v1, int b, int e) {
     return v2;
 }
 
+// Function to extract top n largest elements from v1 and form a list
+list<Number> getTopNLargest(const vector<Number>& v1, int n) {
+    if (n > v1.size() || n < 0) {
+        throw out_of_range("Invalid value of n for top N largest elements.");
+    }
+
+    // Create a copy of v1 for sorting
+    vector<Number> temp(v1);
+
+    // Sort the largest n elements in descending order
+    partial_sort(temp.begin(), temp.begin() + n, temp.end(), [](const Number& a, const Number& b) {
+        return a.getValue() > b.getValue(); // Sort by value descending
+    });
+
+    // Create a list from the top n elements
+    list<Number> list1(temp.begin(), temp.begin() + n);
+    return list1;
+}
+
 int main() {
 
     // Generate vector v1
@@ -58,8 +77,21 @@ int main() {
         vector<Number> v2 = createSubrange(v1, b, e);
 
         // Output the contents of v2 for verification
-        cout << "\nCreated vector v2 with " << v2.size() << " elements (subrange):\n";
-        for (const auto& num : v2) {
+        cout << "\nCreated vector v2 with " << v2.size() << " elements (subrange).\n";
+    } catch (const out_of_range& ex) {
+        cerr << "Error: " << ex.what() << endl;
+    }
+
+    // Define n
+    int n = 30;
+
+    try {
+        // Form list1 with top n largest elements
+        list<Number> list1 = getTopNLargest(v1, n);
+
+        // Output the contents of list1 for verification
+        cout << "\nTop " << n << " largest elements in list1:\n";
+        for (const auto& num : list1) {
             cout << num << "\n";
         }
     } catch (const out_of_range& ex) {
