@@ -278,7 +278,7 @@ int main() {
         list<pair<Number, Number>> list3 = formList3(list1, list2);
 
         // Output the contents of list3
-        cout << "\nList3 (pairs of elements from list1 and list2) of size " << list3.size() << ":\n";
+        cout << "\nList3 (pairs of elements from list1 and list2) of size " << list3.size() << ".\n";
         
         // Pair elements of v1 and v2 without resizing
         vector<pair<Number, Number>> v4 = pairElementsWithoutResizing(v1, v2);
