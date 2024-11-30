@@ -73,7 +73,7 @@ list<Number> getTopNLargest(const vector<Number>& v1, int n) {
 
     // Get the largest n elements from v1
     copy_if(v1.begin(), v1.end(), list1.begin(), [temp, n](const Number& num) {
-        return num.getValue() >= temp[n - 1].getValue(); // Greater than median
+        return num.getValue() >= temp[n - 1].getValue();
     });
 
     return list1;
@@ -98,7 +98,7 @@ list<Number> getSmallestNElements(const vector<Number>& v2, int n) {
 
     // Get the smallest n elements from v2
     copy_if(v2.begin(), v2.end(), list2.begin(), [temp, n](const Number& num) {
-        return num.getValue() <= temp[n - 1].getValue(); // Greater than median
+        return num.getValue() <= temp[n - 1].getValue();
     });
 
     return list2;
@@ -147,6 +147,21 @@ void removeOddElements(list<Number>& lst) {
     lst.remove_if([](const Number& num) {
         return num.getValue() % 2 != 0; // Check if value is odd
     });
+}
+
+// Function to create common elements vector v3 from the vectors v1 and v2
+vector<Number> createCommonElementsVector(const vector<Number>& v1, const vector<Number>& v2) {
+    // Create the vector
+    vector<Number> v3;
+    
+    // Check v1 for common elements with v2 and add them to v3
+    copy_if(v1.begin(), v1.end(), back_inserter(v3), [&](const Number& num) {
+        return any_of(v2.begin(), v2.end(), [&](const Number& vectorNum) {
+            return num.getValue() == vectorNum.getValue(); // Match based on value
+        });
+    });
+
+    return v3;
 }
 
 int main() {
@@ -200,14 +215,20 @@ int main() {
         rearrangeListByMedian(list1);
 
         // Output the rearranged list1
-        cout << "\nList1 rearranged by median value:\n";
+        cout << "\nList1 rearranged by median value.\n";
         
         // Remove odd elements from list2
         removeOddElements(list2);
 
         // Output the updated list2
-        cout << "\nList2 after removing odd elements:\n";
-        for (const auto& num : list2) {
+        cout << "\nList2 after removing odd elements of size " << list2.size() << ".\n";
+        
+        // Create v3 with common elements of v1 and v2
+        vector<Number> v3 = createCommonElementsVector(v1, v2);
+
+        // Output the contents of v3
+        cout << "\nVector v3 (common elements of v1 and v2) of size " << v3.size() << ":\n";
+        for (const auto& num : v3) {
             cout << num << "\n";
         }
     } catch (const out_of_range& ex) {
