@@ -190,6 +190,22 @@ list<pair<Number, Number>> formList3(const list<Number>& list1, const list<Numbe
     return list3;
 }
 
+// Function to Pair Elements of v1 and v2 Without Resizing
+vector<pair<Number, Number>> pairElementsWithoutResizing(const vector<Number>& v1, const vector<Number>& v2) {
+    vector<pair<Number, Number>> v3;
+
+    // Use std::min to iterate up to the smaller size of the two vectors
+    size_t smallerSize = min(v1.size(), v2.size());
+
+    // Use std::transform to pair elements
+    transform(v1.begin(), v1.begin() + smallerSize, v2.begin(), back_inserter(v3),
+              [](const Number& num1, const Number& num2) {
+                  return make_pair(num1, num2); // Create a pair
+              });
+
+    return v3;
+}
+
 int main() {
 
     try {
@@ -263,7 +279,13 @@ int main() {
 
         // Output the contents of list3
         cout << "\nList3 (pairs of elements from list1 and list2) of size " << list3.size() << ":\n";
-        for (const auto& [num1, num2] : list3) {
+        
+        // Pair elements of v1 and v2 without resizing
+        vector<pair<Number, Number>> v4 = pairElementsWithoutResizing(v1, v2);
+
+        // Output the contents of v4
+        cout << "\nVector v4 (pairs of elements from v1 and v2 without resizing) of size " << v4.size() << ":\n";
+        for (const auto& [num1, num2] : v4) {
             cout << "(" << num1 << ", " << num2 << ")\n";
         }
     } catch (const out_of_range& ex) {
