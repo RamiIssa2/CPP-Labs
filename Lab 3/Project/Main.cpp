@@ -4,6 +4,7 @@
 #include <list>
 #include <algorithm>
 #include <random>
+#include <unordered_set>
 
 using namespace std;
 
@@ -21,10 +22,22 @@ vector<Number> createRandomVector() {
     // Create the vector
     vector<Number> v1(size);
 
-    // Populate the vector with random Number objects
-    generate(v1.begin(), v1.end(), [&]() {
-        return Number(valueDist(gen));
-    });
+    // Set to track already-used values
+    unordered_set<int> usedValues;
+
+    // Lambda function to generate unique values
+    auto uniqueNumberGenerator = [&]() -> Number {
+        int randomValue;
+        do {
+            randomValue = valueDist(gen); // Generate a random number
+        } while (usedValues.find(randomValue) != usedValues.end()); // Ensure uniqueness
+
+        usedValues.insert(randomValue); // Track the new value
+        return Number(randomValue);    // Create and return a Number object
+    };
+
+    // Populate the vector using std::generate
+    generate(v1.begin(), v1.end(), uniqueNumberGenerator);
 
     return v1;
 }
@@ -79,6 +92,15 @@ list<Number> getSmallestNElements(const vector<Number>& v2, int n) {
     return list2;
 }
 
+void removeElementsFromVector(vector<Number>& vec, const list<Number>& lst) {
+    vec.erase(remove_if(vec.begin(), vec.end(), [&](const Number& num) {
+        // Check if num matches an element in the list (based on value for precise comparison)
+        return any_of(lst.begin(), lst.end(), [&](const Number& listNum) {
+            return num.getValue() == listNum.getValue(); // Match based on value
+        });
+    }), vec.end());
+}
+
 int main() {
 
     try {
@@ -112,9 +134,16 @@ int main() {
 
         // Output the contents of list2 for verification
         cout << "\nSmallest " << n << " elements from v2 in list2:\n";
-        for (const auto& num : list2) {
-            cout << num << "\n";
-        }
+        
+        // Remove elements in list1 from v1
+        removeElementsFromVector(v1, list1);
+
+        // Remove elements in list2 from v2
+        removeElementsFromVector(v2, list2);
+
+        // Output the sizes of v1 and v2 after removal
+        cout << "\nSize of v1 after removing elements in list1: " << v1.size() << endl;
+        cout << "Size of v2 after removing elements in list2: " << v2.size() << endl;
     } catch (const out_of_range& ex) {
         cerr << "Error: " << ex.what() << endl;
     }
