@@ -164,6 +164,32 @@ vector<Number> createCommonElementsVector(const vector<Number>& v1, const vector
     return v3;
 }
 
+// Function to Equalize List Sizes
+void equalizeListSizes(list<Number>& list1, list<Number>& list2) {
+    if (list1.size() > list2.size()) {
+        auto it = list1.begin();
+        std::advance(it, list1.size() - list2.size()); // Move iterator forward by the difference
+        list1.erase(list1.begin(), it); // Erase the first `n` elements
+    } else if (list2.size() > list1.size()) {
+        auto it = list2.begin();
+        std::advance(it, list2.size() - list1.size()); // Move iterator forward by the difference
+        list2.erase(list2.begin(), it); // Erase the first `n` elements
+    }
+}
+
+// Function to Create list3
+list<pair<Number, Number>> formList3(const list<Number>& list1, const list<Number>& list2) {
+    list<pair<Number, Number>> list3;
+
+    // Use std::transform to create pairs
+    transform(list1.begin(), list1.end(), list2.begin(), back_inserter(list3),
+              [](const Number& num1, const Number& num2) {
+                  return make_pair(num1, num2); // Pair elements from list1 and list2
+              });
+
+    return list3;
+}
+
 int main() {
 
     try {
@@ -215,7 +241,7 @@ int main() {
         rearrangeListByMedian(list1);
 
         // Output the rearranged list1
-        cout << "\nList1 rearranged by median value.\n";
+        cout << "\nList1 rearranged by median value of size " << list1.size() << ".\n";
         
         // Remove odd elements from list2
         removeOddElements(list2);
@@ -227,9 +253,18 @@ int main() {
         vector<Number> v3 = createCommonElementsVector(v1, v2);
 
         // Output the contents of v3
-        cout << "\nVector v3 (common elements of v1 and v2) of size " << v3.size() << ":\n";
-        for (const auto& num : v3) {
-            cout << num << "\n";
+        cout << "\nVector v3 (common elements of v1 and v2) of size " << v3.size() << ".\n";
+
+        // Equalize the sizes of list1 and list2 using std::advance
+        equalizeListSizes(list1, list2);
+
+        // Form list3 with pairs from list1 and list2 using std::transform
+        list<pair<Number, Number>> list3 = formList3(list1, list2);
+
+        // Output the contents of list3
+        cout << "\nList3 (pairs of elements from list1 and list2) of size " << list3.size() << ":\n";
+        for (const auto& [num1, num2] : list3) {
+            cout << "(" << num1 << ", " << num2 << ")\n";
         }
     } catch (const out_of_range& ex) {
         cerr << "Error: " << ex.what() << endl;
