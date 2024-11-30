@@ -232,7 +232,7 @@ int main() {
         list<Number> list1 = getTopNLargest(v1, n1);
 
         // Output the contents of list1 for verification
-        cout << "\nTop " << n1 << " largest elements from v1 in list1:\n";
+        cout << "\nTop " << n1 << " largest elements from v1 in list1.\n";
 
         // Define n for list2
         int n2 = 30;
@@ -241,7 +241,7 @@ int main() {
         list<Number> list2 = getSmallestNElements(v2, n2);
 
         // Output the contents of list2 for verification
-        cout << "\nSmallest " << n2 << " elements from v2 in list2:\n";
+        cout << "\nSmallest " << n2 << " elements from v2 in list2.\n";
         
         // Remove elements in list1 from v1
         removeElementsFromVector(v1, list1);
