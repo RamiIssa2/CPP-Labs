@@ -104,6 +104,7 @@ list<Number> getSmallestNElements(const vector<Number>& v2, int n) {
     return list2;
 }
 
+// Function to remove elements from a vector that are in the list
 void removeElementsFromVector(vector<Number>& vec, const list<Number>& lst) {
     vec.erase(remove_if(vec.begin(), vec.end(), [&](const Number& num) {
         // Check if num matches an element in the list (based on value for precise comparison)
@@ -113,6 +114,7 @@ void removeElementsFromVector(vector<Number>& vec, const list<Number>& lst) {
     }), vec.end());
 }
 
+// Function to rearrange list by median
 void rearrangeListByMedian(list<Number>& lst) {
     if (lst.empty()) {
         throw invalid_argument("List is empty. Cannot rearrange by median.");
@@ -137,6 +139,14 @@ void rearrangeListByMedian(list<Number>& lst) {
 
     // Re-sort the second partition to maintain relative order
     lst.splice(lst.end(), lst, partitionPoint, lst.end());
+}
+
+// Function to remove odd elements form a list
+void removeOddElements(list<Number>& lst) {
+    // Remove elements where value is odd
+    lst.remove_if([](const Number& num) {
+        return num.getValue() % 2 != 0; // Check if value is odd
+    });
 }
 
 int main() {
@@ -191,7 +201,13 @@ int main() {
 
         // Output the rearranged list1
         cout << "\nList1 rearranged by median value:\n";
-        for (const auto& num : list1) {
+        
+        // Remove odd elements from list2
+        removeOddElements(list2);
+
+        // Output the updated list2
+        cout << "\nList2 after removing odd elements:\n";
+        for (const auto& num : list2) {
             cout << num << "\n";
         }
     } catch (const out_of_range& ex) {
