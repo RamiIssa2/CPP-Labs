@@ -68,8 +68,14 @@ list<Number> getTopNLargest(const vector<Number>& v1, int n) {
         return a.getValue() > b.getValue(); // Sort by value descending
     });
 
-    // Create a list from the top n elements
-    list<Number> list1(temp.begin(), temp.begin() + n);
+    // Create the list
+    list<Number> list1(n);
+
+    // Get the largest n elements from v1
+    copy_if(v1.begin(), v1.end(), list1.begin(), [temp, n](const Number& num) {
+        return num.getValue() >= temp[n - 1].getValue(); // Greater than median
+    });
+
     return list1;
 }
 
@@ -87,8 +93,14 @@ list<Number> getSmallestNElements(const vector<Number>& v2, int n) {
         return a.getValue() < b.getValue(); // Sort by value ascending
     });
 
-    // Create a list from the smallest n elements
-    list<Number> list2(temp.begin(), temp.begin() + n);
+    // Create the list
+    list<Number> list2(n);
+
+    // Get the smallest n elements from v2
+    copy_if(v2.begin(), v2.end(), list2.begin(), [temp, n](const Number& num) {
+        return num.getValue() <= temp[n - 1].getValue(); // Greater than median
+    });
+
     return list2;
 }
 
@@ -99,6 +111,32 @@ void removeElementsFromVector(vector<Number>& vec, const list<Number>& lst) {
             return num.getValue() == listNum.getValue(); // Match based on value
         });
     }), vec.end());
+}
+
+void rearrangeListByMedian(list<Number>& lst) {
+    if (lst.empty()) {
+        throw invalid_argument("List is empty. Cannot rearrange by median.");
+    }
+
+    // Step 1: Copy list to a vector for random access
+    vector<Number> temp(lst.begin(), lst.end());
+
+    // Step 2: Sort the vector to find the median
+    sort(temp.begin(), temp.end(), [](const Number& a, const Number& b) {
+        return a.getValue() < b.getValue(); // Sort ascending
+    });
+
+    // Step 3: Find the median element
+    int medianIndex = temp.size() / 2;
+    int medianValue = temp[medianIndex].getValue(); // Median value
+
+    // Step 4: Partition the list based on the median value
+    auto partitionPoint = partition(lst.begin(), lst.end(), [medianValue](const Number& num) {
+        return num.getValue() > medianValue; // Greater than median
+    });
+
+    // Re-sort the second partition to maintain relative order
+    lst.splice(lst.end(), lst, partitionPoint, lst.end());
 }
 
 int main() {
@@ -120,20 +158,23 @@ int main() {
         // Output the contents of v2 for verification
         cout << "\nCreated vector v2 with " << v2.size() << " elements (subrange).\n";
 
-        // Define n
-        int n = 30;
+        // Define n for list1
+        int n1 = 30;
 
         // Form list1 with top n largest elements
-        list<Number> list1 = getTopNLargest(v1, n);
+        list<Number> list1 = getTopNLargest(v1, n1);
 
         // Output the contents of list1 for verification
-        cout << "\nTop " << n << " largest elements from v1 in list1:\n";
+        cout << "\nTop " << n1 << " largest elements from v1 in list1:\n";
+
+        // Define n for list2
+        int n2 = 30;
 
         // Form list2 with smallest n elements from v2
-        list<Number> list2 = getSmallestNElements(v2, n);
+        list<Number> list2 = getSmallestNElements(v2, n2);
 
         // Output the contents of list2 for verification
-        cout << "\nSmallest " << n << " elements from v2 in list2:\n";
+        cout << "\nSmallest " << n2 << " elements from v2 in list2:\n";
         
         // Remove elements in list1 from v1
         removeElementsFromVector(v1, list1);
@@ -144,6 +185,15 @@ int main() {
         // Output the sizes of v1 and v2 after removal
         cout << "\nSize of v1 after removing elements in list1: " << v1.size() << endl;
         cout << "Size of v2 after removing elements in list2: " << v2.size() << endl;
+
+        // Rearrange list1 based on the median
+        rearrangeListByMedian(list1);
+
+        // Output the rearranged list1
+        cout << "\nList1 rearranged by median value:\n";
+        for (const auto& num : list1) {
+            cout << num << "\n";
+        }
     } catch (const out_of_range& ex) {
         cerr << "Error: " << ex.what() << endl;
     }
