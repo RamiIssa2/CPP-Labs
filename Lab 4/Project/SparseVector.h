@@ -58,4 +58,27 @@ public:
         return (it != elements.end()) ? it->second : T(0);
     }
 
+    // Binary operations
+    SparseVector<T> operator+(const SparseVector<T>& other) const {
+        if (size != other.size) {
+            throw std::invalid_argument("Vector sizes must match");
+        }
+        SparseVector<T> result(size);
+        for (const auto& [index, value] : elements) {
+            result.elements[index] = value;
+        }
+        for (const auto& [index, value] : other.elements) {
+            result.elements[index] += value;
+        }
+        return result;
+    }
+
+    SparseVector<T> operator*(const T& scalar) const {
+        SparseVector<T> result(size);
+        for (const auto& [index, value] : elements) {
+            result.elements[index] = value * scalar;
+        }
+        return result;
+    }
+
 };
