@@ -68,4 +68,15 @@ public:
         return result;
     }
 
+    // Scalar multiplication
+    SparseMatrix<T> operator*(const T& scalar) const {
+        SparseMatrix<T> result(rows, cols);
+        for (const auto& [row, colMap] : elements) {
+            for (const auto& [col, value] : colMap) {
+                result.set(row, col, value * scalar);
+            }
+        }
+        return result;
+    }
+
 };
