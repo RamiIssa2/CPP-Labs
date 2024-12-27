@@ -41,4 +41,21 @@ public:
         }
     }
 
+    // Access operator (read/write)
+    T& operator[](size_t index) {
+        if (index >= size) {
+            throw std::out_of_range("Index out of range");
+        }
+        return elements[index];
+    }
+
+    // Access operator (read-only)
+    const T operator[](size_t index) const {
+        if (index >= size) {
+            throw std::out_of_range("Index out of range");
+        }
+        auto it = elements.find(index);
+        return (it != elements.end()) ? it->second : T(0);
+    }
+
 };
