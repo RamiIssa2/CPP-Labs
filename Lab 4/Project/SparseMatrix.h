@@ -117,6 +117,32 @@ public:
         return result;
     }
 
+    // Matrix exponentiation (only for square matrices)
+    SparseMatrix<T> operator^(size_t exponent) const {
+        if (rows != cols) {
+            throw std::invalid_argument("Matrix exponentiation is only defined for square matrices");
+        }
+
+        SparseMatrix<T> result(rows, cols);
+        SparseMatrix<T> base(*this);
+
+        // Initialize result as the identity matrix
+        for (size_t i = 0; i < rows; ++i) {
+            result.set(i, i, T(1));
+        }
+
+        // Exponentiation by squaring
+        while (exponent > 0) {
+            if (exponent % 2 == 1) {
+                result = result * base;
+            }
+            base = base * base;
+            exponent /= 2;
+        }
+
+        return result;
+    }
+
     // Inverse of a square matrix (assuming non-singular)
     SparseMatrix<T> inverse() const {
         if (rows != cols) {
