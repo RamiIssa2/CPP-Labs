@@ -1,4 +1,4 @@
-# Assignment for Lab Work №4 in the course "Programming in C++"
+# Lab Assignment #4 for the C++ Programming Course
 
 ## Working with Sparse Vectors and Matrices
 
