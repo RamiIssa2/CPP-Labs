@@ -57,4 +57,15 @@ public:
         }
     }
 
+    // Transpose the matrix
+    SparseMatrix<T> transpose() const {
+        SparseMatrix<T> result(cols, rows);
+        for (const auto& [row, colMap] : elements) {
+            for (const auto& [col, value] : colMap) {
+                result.set(col, row, value);
+            }
+        }
+        return result;
+    }
+
 };
