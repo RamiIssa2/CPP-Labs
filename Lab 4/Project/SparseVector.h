@@ -81,4 +81,13 @@ public:
         return result;
     }
 
+    // Element-wise operations
+    SparseVector<T> operator^(const T& exponent) const {
+        SparseVector<T> result(size);
+        for (const auto& [index, value] : elements) {
+            result.elements[index] = std::pow(value, exponent);
+        }
+        return result;
+    }
+
 };
