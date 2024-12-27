@@ -68,6 +68,25 @@ public:
         return result;
     }
 
+    // Addition with another SparseMatrix
+    SparseMatrix<T> operator+(const SparseMatrix<T>& other) const {
+        if (rows != other.rows || cols != other.cols) {
+            throw std::invalid_argument("Matrix dimensions must match");
+        }
+        SparseMatrix<T> result(rows, cols);
+        for (const auto& [row, colMap] : elements) {
+            for (const auto& [col, value] : colMap) {
+                result.set(row, col, value);
+            }
+        }
+        for (const auto& [row, colMap] : other.elements) {
+            for (const auto& [col, value] : colMap) {
+                result.set(row, col, result.get(row, col) + value);
+            }
+        }
+        return result;
+    }
+
     // Scalar multiplication
     SparseMatrix<T> operator*(const T& scalar) const {
         SparseMatrix<T> result(rows, cols);
