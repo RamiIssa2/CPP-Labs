@@ -15,9 +15,19 @@ int main() {
     std::cout << "Vector elements:" << std::endl;
     vec.print();
 
-    std::cout << "Dot product of vec with itself: " << vec.dot(vec) << std::endl;
+    // Scalar multiplication
+    std::cout << "\nVector multiplied by scalar 3:" << std::endl;
+    SparseVector<int> vec_scaled = vec * 3;
+    vec_scaled.print();
 
-    std::cout << "Exponentiation of vec with ^2:" << std::endl;
+    // Matrix addition
+    std::cout << "\nVector added to itself:" << std::endl;
+    SparseVector<int> vec_sum = vec + vec;
+    vec_sum.print();
+
+    std::cout << "\nDot product of vec with itself: " << vec.dot(vec) << std::endl;
+
+    std::cout << "\nExponentiation of vec with ^2:" << std::endl;
     SparseVector<int> vec_exp = vec ^ 2;
     vec_exp.print();
 
@@ -64,6 +74,37 @@ int main() {
         std::cout << "\nInverse of the matrix:" << std::endl;
         SparseMatrix<double> mat_inv = mat.inverse();
         mat_inv.print();
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    // Testing SparseMatrix #2
+    std::cout << "\nTesting SparseMatrix #2" << std::endl;
+    SparseMatrix<double> mat2(3, 3);
+
+    // Setting matrix values
+    mat2.set(0, 0, -3.0);
+    mat2.set(0, 1, 2.0);
+    mat2.set(0, 2, -1.0);
+    mat2.set(1, 0, 6.0);
+    mat2.set(1, 1, -6.0);
+    mat2.set(1, 2, 7.0);
+    mat2.set(2, 0, 3.0);
+    mat2.set(2, 1, -4.0);
+    mat2.set(2, 2, 4.0);
+
+    std::cout << "Matrix elements:" << std::endl;
+    mat2.print();
+
+    // Inverse (only applicable for invertible square matrices)
+    try {
+        std::cout << "\nInverse of the matrix:" << std::endl;
+        SparseMatrix<double> mat2_inv = mat2.inverse();
+        mat2_inv.print();
+
+        std::cout << "\nMatrix multiplied by its inverse (to make sure that it works):" << std::endl;
+        SparseMatrix<double> mat2_prod = mat2 * mat2_inv;
+        mat2_prod.print();
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }

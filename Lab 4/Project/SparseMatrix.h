@@ -1,6 +1,7 @@
 #pragma once
 
 #include <unordered_map>
+#include <map>
 #include <cstddef>
 #include <stdexcept>
 #include <cmath>
@@ -189,8 +190,18 @@ public:
 
     // Print the matrix
     void print() const {
-        std::cout << "SparseMatrix: " << rows << "x" << cols << std::endl;
+        std::map<size_t, std::map<size_t, T>> sorted_elements;
+
+        // Convert unordered_map to nested map for sorted traversal
         for (const auto& [row, colMap] : elements) {
+            for (const auto& [col, value] : colMap) {
+                sorted_elements[row][col] = value;
+            }
+        }
+
+        // Print the sorted elements
+        std::cout << "SparseMatrix: " << rows << "x" << cols << std::endl;
+        for (const auto& [row, colMap] : sorted_elements) {
             for (const auto& [col, value] : colMap) {
                 std::cout << "(" << row << ", " << col << "): " << value << std::endl;
             }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <unordered_map>
+#include <map>
 #include <cstddef>
 #include <stdexcept>
 #include <iterator>
@@ -109,8 +110,10 @@ public:
 
     // Print function
     void print() const {
+        std::map<size_t, T> sorted_elements(elements.begin(), elements.end()); // Use std::map for sorted traversal
+
         std::cout << "SparseVector: { ";
-        for (const auto& [index, value] : elements) {
+        for (const auto& [index, value] : sorted_elements) {
             std::cout << "(" << index << ": " << value << ") ";
         }
         std::cout << "} Size: " << size << std::endl;
