@@ -16,4 +16,13 @@ public:
     // Constructor
     SparseMatrix(size_t rows, size_t cols) : rows(rows), cols(cols) {}
 
+    // Getters for dimensions
+    size_t getRows() const {
+        return rows;
+    }
+
+    size_t getCols() const {
+        return cols;
+    }
+
 };
