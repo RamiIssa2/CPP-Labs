@@ -117,4 +117,48 @@ public:
         return result;
     }
 
+    // Inverse of a square matrix (assuming non-singular)
+    SparseMatrix<T> inverse() const {
+        if (rows != cols) {
+            throw std::invalid_argument("Matrix inversion is only defined for square matrices");
+        }
+
+        SparseMatrix<T> identity(rows, cols);
+        SparseMatrix<T> result(*this);
+
+        // Initialize identity matrix
+        for (size_t i = 0; i < rows; ++i) {
+            identity.set(i, i, T(1));
+        }
+
+        // Gaussian elimination for sparse matrices
+        for (size_t i = 0; i < rows; ++i) {
+            // Find pivot
+            if (result.get(i, i) == T(0)) {
+                throw std::runtime_error("Matrix is singular and cannot be inverted");
+            }
+
+            T pivot = result.get(i, i);
+
+            // Normalize pivot row
+            for (size_t j = 0; j < cols; ++j) {
+                result.set(i, j, result.get(i, j) / pivot);
+                identity.set(i, j, identity.get(i, j) / pivot);
+            }
+
+            // Eliminate other rows
+            for (size_t k = 0; k < rows; ++k) {
+                if (k != i) {
+                    T factor = result.get(k, i);
+                    for (size_t j = 0; j < cols; ++j) {
+                        result.set(k, j, result.get(k, j) - factor * result.get(i, j));
+                        identity.set(k, j, identity.get(k, j) - factor * identity.get(i, j));
+                    }
+                }
+            }
+        }
+
+        return identity;
+    }
+
 };
