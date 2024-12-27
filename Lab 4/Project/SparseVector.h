@@ -116,4 +116,34 @@ public:
         std::cout << "} Size: " << size << std::endl;
     }
 
+    // Iterator for non-zero elements
+    class Iterator {
+    private:
+        typename std::unordered_map<size_t, T>::const_iterator it;
+
+    public:
+        explicit Iterator(typename std::unordered_map<size_t, T>::const_iterator it) : it(it) {}
+
+        Iterator& operator++() {
+            ++it;
+            return *this;
+        }
+
+        bool operator!=(const Iterator& other) const {
+            return it != other.it;
+        }
+
+        const std::pair<const size_t, T>& operator*() const {
+            return *it;
+        }
+    };
+
+    Iterator begin() const {
+        return Iterator(elements.cbegin());
+    }
+
+    Iterator end() const {
+        return Iterator(elements.cend());
+    }
+
 };

@@ -45,6 +45,12 @@
     "xstddef": "cpp",
     "xtr1common": "cpp",
     "vector": "cpp",
-    "list": "cpp"
+    "list": "cpp",
+    "algorithm": "cpp",
+    "numeric": "cpp",
+    "random": "cpp",
+    "unordered_map": "cpp",
+    "unordered_set": "cpp",
+    "xhash": "cpp"
   }
 }
