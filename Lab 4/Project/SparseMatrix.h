@@ -25,4 +25,36 @@ public:
         return cols;
     }
 
+    // Access element (read-only)
+    T get(size_t row, size_t col) const {
+        if (row >= rows || col >= cols) {
+            throw std::out_of_range("Index out of range");
+        }
+        auto rowIt = elements.find(row);
+        if (rowIt != elements.end()) {
+            auto colIt = rowIt->second.find(col);
+            return (colIt != rowIt->second.end()) ? colIt->second : T(0);
+        }
+        return T(0);
+    }
+
+    // Set element value
+    void set(size_t row, size_t col, const T& value) {
+        if (row >= rows || col >= cols) {
+            throw std::out_of_range("Index out of range");
+        }
+        if (value != T(0)) {
+            elements[row][col] = value;
+        } else {
+            // Remove entry if value is zero to maintain sparsity
+            auto rowIt = elements.find(row);
+            if (rowIt != elements.end()) {
+                rowIt->second.erase(col);
+                if (rowIt->second.empty()) {
+                    elements.erase(row);
+                }
+            }
+        }
+    }
+
 };
