@@ -161,4 +161,14 @@ public:
         return identity;
     }
 
+    // Print the matrix
+    void print() const {
+        std::cout << "SparseMatrix: " << rows << "x" << cols << std::endl;
+        for (const auto& [row, colMap] : elements) {
+            for (const auto& [col, value] : colMap) {
+                std::cout << "(" << row << ", " << col << "): " << value << std::endl;
+            }
+        }
+    }
+
 };
