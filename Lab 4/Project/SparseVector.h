@@ -90,4 +90,19 @@ public:
         return result;
     }
 
+    // Dot product
+    T dot(const SparseVector<T>& other) const {
+        if (size != other.size) {
+            throw std::invalid_argument("Vector sizes must match");
+        }
+        T result = T(0);
+        for (const auto& [index, value] : elements) {
+            auto it = other.elements.find(index);
+            if (it != other.elements.end()) {
+                result += value * it->second;
+            }
+        }
+        return result;
+    }
+
 };
