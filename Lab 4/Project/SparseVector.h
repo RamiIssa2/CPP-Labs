@@ -1,9 +1,11 @@
 #pragma once
 
-#include <iostream>
 #include <unordered_map>
-#include <iterator>
 #include <cstddef>
+#include <stdexcept>
+#include <iterator>
+#include <cmath>
+#include <iostream>
 
 template <typename T>
 class SparseVector {
@@ -103,6 +105,15 @@ public:
             }
         }
         return result;
+    }
+
+    // Print function
+    void print() const {
+        std::cout << "SparseVector: { ";
+        for (const auto& [index, value] : elements) {
+            std::cout << "(" << index << ": " << value << ") ";
+        }
+        std::cout << "} Size: " << size << std::endl;
     }
 
 };
