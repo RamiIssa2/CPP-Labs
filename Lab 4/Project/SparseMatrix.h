@@ -98,4 +98,23 @@ public:
         return result;
     }
 
+    // Matrix multiplication
+    SparseMatrix<T> operator*(const SparseMatrix<T>& other) const {
+        if (cols != other.rows) {
+            throw std::invalid_argument("Matrix dimensions are incompatible for multiplication");
+        }
+        SparseMatrix<T> result(rows, other.cols);
+        for (const auto& [row, colMap] : elements) {
+            for (const auto& [col, value] : colMap) {
+                auto it = other.elements.find(col);
+                if (it != other.elements.end()) {
+                    for (const auto& [k, otherValue] : it->second) {
+                        result.set(row, k, result.get(row, k) + value * otherValue);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
 };
