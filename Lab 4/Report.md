@@ -1001,7 +1001,7 @@ std::cout << "Sparse Vector Dot Product Time: " << std::fixed << std::setprecisi
 
 // Measure time for multiplication by scalar on dense vector
 double denseVSMultTime = measureDenseVectorOperation(denseVA, denseVB, multiplyDenseVectorByScalar);
-std::cout << "Dense Vector mult scalar  Time: " << std::fixed << std::setprecision(2) << denseVSMultTime << " ms | ";
+std::cout << "Dense Vector Multiplication by scalar Time: " << std::fixed << std::setprecision(2) << denseVSMultTime << " ms | ";
 
 // Measure time for multiplication by scalar on sparse vector
 double sparseVSMultTime = measureSparseVectorOperation(sparseVectorA, sparseVectorB, multiplySparseVectorByScalar);
@@ -1014,7 +1014,7 @@ std::cout << "Sparse Vector Multiplication by Scalar Time: " << std::fixed << st
 ====== Vector Testing ========
 Dense Vector Addition Time: 0.13 ms | Sparse Vector Addition Time: 1.34 ms
 Dense Vector dot product Time: 0.07 ms | Sparse Vector Dot Product Time: 0.02 ms
-Dense Vector mult scalar  Time: 0.12 ms | Sparse Vector Multiplication by Scalar Time: 1.01 ms
+Dense Vector Multiplication by scalar Time: 0.12 ms | Sparse Vector Multiplication by Scalar Time: 1.01 ms
 ```
 
 **Сравнение матриц**
@@ -1076,3 +1076,5 @@ Dense Matrix Multiplication by scalar Time: 139.11 ms | Sparse Matrix Multiplica
 ```
 
 ---
+
+### Выводы

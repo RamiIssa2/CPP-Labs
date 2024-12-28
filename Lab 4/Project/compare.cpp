@@ -290,7 +290,7 @@ int main() {
 
     // Measure time for multiplication by scalar on dense vector
     double denseVSMultTime = measureDenseVectorOperation(denseVA, denseVB, multiplyDenseVectorByScalar);
-    std::cout << "Dense Vector mult scalar  Time: " << std::fixed << std::setprecision(2) << denseVSMultTime << " ms | ";
+    std::cout << "Dense Vector Multiplication by scalar Time: " << std::fixed << std::setprecision(2) << denseVSMultTime << " ms | ";
 
     // Measure time for multiplication by scalar on sparse vector
     double sparseVSMultTime = measureSparseVectorOperation(sparseVectorA, sparseVectorB, multiplySparseVectorByScalar);
